@@ -7,7 +7,7 @@ const Configstore = require('configstore');
 const { fetchTemplate } = require('../utils/network');
 const { loadPlugins } = require('../plugin/manager');
 
-const PKG = require('../package.json');
+const PKG = require('../../package.json');
 
 class Logger {
   constructor(options = {}) {
