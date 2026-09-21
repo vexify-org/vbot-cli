@@ -1,27 +1,47 @@
 {
   "name": "vbot-cli",
   "version": "1.0.0",
-  "description": "VBot 命令行工具 | Command line tools for VBot ecosystem",
-  "main": "src/index.js",
-  "type": "module",
-  "engines": {
-    "node": ">=18"
+  "description": "Production-grade CLI framework for modern JavaScript — init, deploy, build, and extend with plugins",
+  "keywords": ["cli", "framework", "toolkit", "vbot", "commander", "plugin"],
+  "license": "MIT",
+  "author": "VBot Team <vbot@example.com>",
+  "homepage": "https://github.com/vexify-org/vbot-cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vexify-org/vbot-cli.git"
   },
-  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "bin": {
     "vbot": "./bin/vbot.js"
   },
+  "main": "src/index.js",
   "scripts": {
-    "start": "node bin/vbot.js"
+    "start": "node bin/vbot.js",
+    "dev": "nodemon bin/vbot.js",
+    "test": "jest",
+    "lint": "eslint bin/ src/ test/",
+    "pretest": "eslint bin/ src/ test/",
+    "prepublishOnly": "echo 'Run tests: npm test' && exit 0"
   },
   "dependencies": {
-    "commander": "^12.1.0"
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "configstore": "^7.0.0",
+    "ora": "^8.0.1"
   },
-  "keywords": [
-    "cli",
-    "vbot",
-    "command-line"
-  ],
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/test/**/*.test.js"],
+    "collectCoverageFrom": ["src/**/*.js", "!src/**/*.test.js"],
+    "verbose": true
+  },
   "files": [
     "bin/",
     "src/"
