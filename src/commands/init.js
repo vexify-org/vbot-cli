@@ -15,8 +15,8 @@ function capitalize(str) {
 }
 
 function sanitizeName(name) {
-  // Fixed: put hyphen at end of char class to treat as literal, not range
-  return name.replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase();
+  // Allow only alphanumerics and hyphens, replace everything else with hyphen
+  return name.replace(/[^a-zA-Z0-9-]/g, '-').toLowerCase();
 }
 
 function generateTemplateVars(name, options = {}) {
