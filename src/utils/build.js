@@ -56,10 +56,8 @@ function runBuild(buildCommand, envVars = {}, logger) {
     child.stderr.on('data', d => {
       const text = d.toString();
       stderr += text;
-      process.stderr.write(chalk => {
-        // Simple colored stderr
-        return `\x1b[31m${text}\x1b[0m`;
-      }(d.toString()));
+      // Simple colored stderr
+      process.stderr.write(`\x1b[31m${text}\x1b[0m`);
     });
 
     child.on('error', err => {
