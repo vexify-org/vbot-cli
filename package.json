@@ -1,0 +1,29 @@
+{
+  "name": "vbot-cli",
+  "version": "1.0.0",
+  "description": "Production-grade CLI framework for modern JavaScript — init, deploy, plugin system, and more",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "vbot": "./bin/vbot.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node bin/vbot.js",
+    "test": "node --test test/",
+    "lint": "eslint src/"
+  },
+  "keywords": ["cli", "framework", "toolkit", "vbot", "commander", "plugin"],
+  "author": "VBot <vbot@vexify.de>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "ora": "^8.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0"
+  }
+}
