@@ -15,7 +15,7 @@ function capitalize(str) {
 }
 
 function sanitizeName(name) {
-  // Fixed: put hyphen at the end of char class to treat as literal, not range
+  // Fixed: put hyphen at end of char class to treat as literal, not range
   return name.replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase();
 }
 
@@ -165,3 +165,14 @@ app.init().then(() => app.start());
 MIT © {{year}} {{author}}
 `;
 
+module.exports = {
+  camelCase,
+  capitalize,
+  sanitizeName,
+  generateTemplateVars,
+  renderTemplate,
+  TEMPLATE_PACKAGE_JSON,
+  TEMPLATE_INDEX_JS,
+  TEMPLATE_GITIGNORE,
+  TEMPLATE_README,
+};
