@@ -1,32 +1,49 @@
 name: CI
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # 允许手动触发
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
 
+# 最小权限原则，保护帝国安全
+permissions:
+  contents: read
+
+# 并发控制，避免同一分支重复跑，节约算力
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Test (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    timeout-minutes: 15 # 防止死循环卡死
+    
     strategy:
       fail-fast: false
       matrix:
-        node: ['18', '20', '22']
+        # 2026年9月：18和20均已EOL，拥抱主流的 20, 22, 24
+        node: ['20', '22', '24']
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5 # 建议更新到 v5 或最新版本
+      
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
+          # 如果你把 package-lock.json 提交了，强烈建议开启 cache 加速
+          cache: npm 
 
       - name: Install dependencies
+        # 如果有 lock 文件，最好用 npm ci；没有就保持 npm install
         run: npm install --no-audit --no-fund
 
       - name: Run linter
-        run: npm run lint || true
+        # 删掉了 || true，让 lint 错误真正暴漏，守护代码帝国基业
+        run: npm run lint
 
       - name: Run tests
         run: npm test
